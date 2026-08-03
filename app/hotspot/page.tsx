@@ -1,4 +1,4 @@
-import { HotspotPurchaseFlow } from "./hotspot-purchase-flow"
+import {HotspotPurchaseFlow} from "@/components/hotspot-purchase-flow";
 
 export default async function HotspotPage({
                                               searchParams,
