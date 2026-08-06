@@ -153,6 +153,22 @@ export async function getSubscriptionById(id: string) {
     return response.json();
 }
 
+export async function getUserById (id:string) {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`,
+        {
+            headers: { Authorization: token ? `Bearer ${token}` : "" },
+            cache: "no-store",
+        }
+    );
+
+    return response.json();
+
+}
+
 export async function getSubscriptionPayments(subscriptionId: string) {
     const cookieStore = await cookies();
     const token = cookieStore.get("token")?.value;
