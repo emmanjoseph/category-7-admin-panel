@@ -36,7 +36,8 @@ const updateSchema = z.object({
     isPrimary: z.boolean(),
 })
 
-type UpdateForm = z.infer<typeof updateSchema>
+type UpdateFormInput = z.input<typeof updateSchema>
+type UpdateForm = z.output<typeof updateSchema>
 
 interface RouterDetails {
     router: Router
@@ -93,7 +94,7 @@ export function RouterDetailsDrawer({
         setValue,
         reset,
         formState: { errors, isSubmitting },
-    } = useForm<UpdateForm>({
+    } = useForm<UpdateFormInput, unknown, UpdateForm>({
         resolver: zodResolver(updateSchema),
     })
 
@@ -103,7 +104,10 @@ export function RouterDetailsDrawer({
         try {
             const res = await fetch(`/api/routers/${routerId}/details`)
             const data = await res.json()
-            if (!res.ok || !data.success) throw new Error(data.message)
+            if (!res.ok || !data.success) {
+                toast.error(data.message || "Failed to load router details")
+                return
+            }
             setDetails(data.data)
             reset({
                 name: data.data.router.name,
@@ -160,7 +164,10 @@ export function RouterDetailsDrawer({
                 body: JSON.stringify(payload),
             })
             const data = await res.json()
-            if (!res.ok || !data.success) throw new Error(data.message)
+            if (!res.ok || !data.success) {
+                toast.error(data.message || "Failed to update router")
+                return
+            }
 
             toast.success("Router updated")
             nextRouter.refresh()

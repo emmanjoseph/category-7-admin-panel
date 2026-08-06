@@ -220,7 +220,7 @@ export function SubscriptionDetailClient({
                     {sub.status === "active" && (
                         <>
                             <Dialog open={upgradeOpen} onOpenChange={setUpgradeOpen}>
-                                <DialogTrigger asChild>
+                                <DialogTrigger >
                                     <Button variant="outline" size="sm">Upgrade Package</Button>
                                 </DialogTrigger>
                                 <DialogContent>
@@ -231,7 +231,10 @@ export function SubscriptionDetailClient({
                                             Customer will need to pay to activate the upgraded subscription.
                                         </DialogDescription>
                                     </DialogHeader>
-                                    <Select value={newPackageId} onValueChange={setNewPackageId}>
+                                    <Select
+                                        value={newPackageId}
+                                        onValueChange={(value) => setNewPackageId(value ?? "")}
+                                    >
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select new package" />
                                         </SelectTrigger>

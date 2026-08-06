@@ -168,7 +168,7 @@ export function getSubscriptionColumns(
 
                 return (
                     <DropdownMenu>
-                        <DropdownMenuTrigger asChild className="aria-expanded:bg-muted cursor-pointer">
+                        <DropdownMenuTrigger  className="aria-expanded:bg-muted cursor-pointer">
                             <button className="p-1 rounded hover:bg-muted">
                                 <MoreHorizontal className="h-4 w-4" />
                             </button>

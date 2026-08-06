@@ -212,7 +212,7 @@ export function SiteHeader() {
 
                         {/* Router Status */}
                         <Tooltip>
-                            <TooltipTrigger asChild>
+                            <TooltipTrigger>
                                 <div className="flex items-center gap-1.5 cursor-default">
                                     <div className={cn(
                                         "size-4 flex items-center justify-center rounded-full border",
@@ -257,7 +257,7 @@ export function SiteHeader() {
 
                             {/* Active Sessions */}
                             <Tooltip>
-                                <TooltipTrigger asChild>
+                                <TooltipTrigger>
                                     <div
                                         className="flex items-center gap-1.5 cursor-pointer hover:opacity-80"
                                         onClick={() => router.push("/sessions")}
@@ -277,7 +277,7 @@ export function SiteHeader() {
 
                             {/* Active Subscriptions */}
                             <Tooltip>
-                                <TooltipTrigger asChild>
+                                <TooltipTrigger>
                                     <div
                                         className="flex items-center gap-1.5 cursor-pointer hover:opacity-80"
                                         onClick={() => router.push("/subscriptions")}
@@ -297,7 +297,7 @@ export function SiteHeader() {
 
                             {/* Revenue Today */}
                             <Tooltip>
-                                <TooltipTrigger asChild>
+                                <TooltipTrigger>
                                     <div
                                         className="flex items-center gap-1.5 cursor-pointer hover:opacity-80"
                                         onClick={() => router.push("/payments")}
@@ -319,7 +319,7 @@ export function SiteHeader() {
                                 <>
                                     <Separator orientation="vertical" className="h-4" />
                                     <Tooltip>
-                                        <TooltipTrigger asChild>
+                                        <TooltipTrigger>
                                             <Badge
                                                 variant="outline"
                                                 className="text-yellow-600 border-yellow-400 cursor-pointer hover:bg-yellow-50 text-xs"

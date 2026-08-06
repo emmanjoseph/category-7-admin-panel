@@ -42,7 +42,8 @@ const routerSchema = z.object({
     location: z.string().min(1, "Location is required"),
 });
 
-type RouterForm = z.infer<typeof routerSchema>;
+type RouterFormInput = z.input<typeof routerSchema>;
+type RouterForm = z.output<typeof routerSchema>;
 
 export function AddRouterDialog() {
     const router = useRouter();
@@ -55,7 +56,7 @@ export function AddRouterDialog() {
         setValue,
         formState: { errors, isSubmitting },
         reset,
-    } = useForm<RouterForm>({
+    } = useForm<RouterFormInput, unknown, RouterForm>({
         resolver: zodResolver(routerSchema),
         defaultValues: {
             name: "",
@@ -186,7 +187,7 @@ export function AddRouterDialog() {
                     </FieldGroup>
 
                     <DialogFooter className="mt-6">
-                        <DialogClose asChild>
+                        <DialogClose >
                             <Button variant="outline">Cancel</Button>
                         </DialogClose>
                         <Button type="submit" disabled={isSubmitting}>

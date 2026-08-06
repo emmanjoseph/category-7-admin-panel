@@ -34,7 +34,8 @@ const packageSchema = z.object({
     mikrotikQueueName: z.string().min(2),
 });
 
-type PackageForm = z.infer<typeof packageSchema>;
+type PackageFormInput = z.input<typeof packageSchema>;
+type PackageForm = z.output<typeof packageSchema>;
 
 export function AddPackageDrawer() {
     const router = useRouter();
@@ -45,7 +46,7 @@ export function AddPackageDrawer() {
         handleSubmit,
         formState: { errors, isSubmitting },
         reset,
-    } = useForm<PackageForm>({
+    } = useForm<PackageFormInput, unknown, PackageForm>({
         resolver: zodResolver(packageSchema),
         defaultValues: {
             name: "",
@@ -86,7 +87,7 @@ export function AddPackageDrawer() {
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
+            <DialogTrigger >
                 <Button>Add New Package</Button>
             </DialogTrigger>
 
@@ -151,7 +152,7 @@ export function AddPackageDrawer() {
                     </FieldGroup>
 
                     <DialogFooter className="mt-6">
-                        <DialogClose asChild>
+                        <DialogClose >
                             <Button variant="outline">Cancel</Button>
                         </DialogClose>
                         <Button type="submit" disabled={isSubmitting}>

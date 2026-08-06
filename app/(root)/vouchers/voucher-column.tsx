@@ -168,7 +168,6 @@ export function getVoucherColumns(
                 return (
                     <DropdownMenu>
                         <DropdownMenuTrigger
-                            asChild
                             className="aria-expanded:bg-muted cursor-pointer"
                         >
                             <button className="p-1 rounded hover:bg-muted">

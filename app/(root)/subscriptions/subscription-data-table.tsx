@@ -73,7 +73,7 @@ export function SubscriptionDataTable<TData, TValue>({
                 />
 
                 <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
+                    <DropdownMenuTrigger>
                         <Button variant="outline">Columns</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">

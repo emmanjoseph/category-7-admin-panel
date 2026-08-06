@@ -85,7 +85,7 @@ export function UserDataTable<TData, TValue>({
                 />
 
                 <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
+                    <DropdownMenuTrigger >
                         <Button variant="outline">
                             Columns
                         </Button>

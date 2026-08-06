@@ -65,7 +65,8 @@ const editSchema = z.object({
     mikrotikQueueName: z.string().min(1, "Queue name is required"),
 })
 
-type EditFormValues = z.infer<typeof editSchema>
+type EditFormInput = z.input<typeof editSchema>
+type EditFormValues = z.output<typeof editSchema>
 
 function authHeaders() {
     const token = localStorage.getItem("token")
@@ -84,7 +85,7 @@ export function DrawerClient({ item }: { item: PackageItem }) {
     const [confirmDelete, setConfirmDelete] = useState<User | null>(null)
 
 
-    const form = useForm<EditFormValues>({
+    const form = useForm<EditFormInput, unknown, EditFormValues>({
         resolver: zodResolver(editSchema),
         defaultValues: {
             name: item.name,

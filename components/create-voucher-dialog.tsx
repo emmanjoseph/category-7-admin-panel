@@ -103,7 +103,7 @@ export function CreateVoucherDialog({ tiers, onCreated }: CreateVoucherDialogPro
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
+            <DialogTrigger >
                 <Button>
                     <Plus className="mr-2 h-4 w-4" />
                     Create Voucher
@@ -147,7 +147,7 @@ export function CreateVoucherDialog({ tiers, onCreated }: CreateVoucherDialogPro
                         <Label>Duration</Label>
                         <Select
                             value={form.tierKey}
-                            onValueChange={(value) => setForm({ ...form, tierKey: value })}
+                            onValueChange={(value) => setForm({ ...form, tierKey: value ?? "" })}
                         >
                             <SelectTrigger>
                                 <SelectValue placeholder="Select duration" />
