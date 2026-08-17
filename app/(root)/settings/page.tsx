@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect ,Suspense} from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,17 +9,20 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { User, Shield, Bell, Globe, CreditCard, Laptop, Save } from "lucide-react";
 import { toast } from "sonner";
+import {Save} from "lucide-react";
 
-export default function SettingsPage() {
+
+function SettingsContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
+
     const tab = searchParams.get("tab") || "general";
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSave = () => {
         setIsLoading(true);
+
         setTimeout(() => {
             setIsLoading(false);
             toast.success("Settings saved successfully");
@@ -38,8 +41,8 @@ export default function SettingsPage() {
                 </div>
             </div>
 
-            <Tabs 
-                value={tab} 
+            <Tabs
+                value={tab}
                 onValueChange={(value) => router.push(`/settings?tab=${value}`)}
                 className="space-y-4"
             >
@@ -282,6 +285,15 @@ export default function SettingsPage() {
                     </Card>
                 </TabsContent>
             </Tabs>
+
         </div>
+    );
+}
+
+export default function SettingsPage() {
+    return (
+        <Suspense fallback={<div>Loading settings...</div>}>
+            <SettingsContent />
+        </Suspense>
     );
 }
