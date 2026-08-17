@@ -4,8 +4,8 @@ import "./globals.css";
 import {ThemeProvider} from "next-themes";
 import { Toaster } from "@/components/ui/sonner"
 
-const elmsSans = Elms_Sans({
-  variable: "--font-elms-sans",
+const inter = Elms_Sans({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
       <>
-        <html lang="en" suppressHydrationWarning className={`$ ${elmsSans.variable} antialiased`}>
+        <html lang="en" suppressHydrationWarning className={`${inter.variable} antialiased`}>
         <head />
         <body>
         <ThemeProvider

@@ -20,7 +20,21 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
 import { EllipsisVerticalIcon, CircleUserRoundIcon, CreditCardIcon, BellIcon, LogOutIcon } from "lucide-react"
+import {useRouter} from "next/navigation";
+import {toast} from "sonner";
 
 export function NavUser({
   user,
@@ -33,6 +47,26 @@ export function NavUser({
 }) {
   const initials = user.name.split(" ").map((n) => n[0]).join("")
   const { isMobile } = useSidebar()
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+      });
+
+      if (response.ok) {
+        toast.success("Logged out successfully");
+        router.push("/sign-in");
+        router.refresh();
+      } else {
+        toast.error("Failed to logout");
+      }
+    } catch (error) {
+      toast.error("An error occurred during logout");
+    }
+  };
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -78,27 +112,26 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push("/settings?tab=profile")} className="cursor-pointer">
                 <CircleUserRoundIcon
                 />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push("/settings?tab=billing")} className="cursor-pointer">
                 <CreditCardIcon
                 />
                 Billing
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push("/settings?tab=notifications")} className="cursor-pointer">
                 <BellIcon
                 />
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOutIcon
-              />
-              Log out
+            <DropdownMenuItem asChild onClick={handleLogout} className="cursor-pointer">
+              <LogOutIcon/>
+              logout
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
